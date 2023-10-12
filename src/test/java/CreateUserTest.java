@@ -1,7 +1,9 @@
+import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.protocol.HTTP;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
@@ -14,6 +16,12 @@ import static java.net.HttpURLConnection.HTTP_CREATED;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateUserTest extends BaseTest {
+    @DisplayName("POST for single user")
+    @Description("Make POST request for single user and validate json in response")
+    @Link("http://jira.com/test-12345")
+    @Feature("API tests")
+    @Owner("Baranov K.M.")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     void createUserTest() {
         String personName = "Horus Lupercal";

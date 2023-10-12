@@ -1,6 +1,8 @@
+import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -12,6 +14,12 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UpdateUserTest extends BaseTest {
+    @DisplayName("PUT for single user")
+    @Description("Make PUT request for single user and validate json in response")
+    @Link("http://jira.com/test-12345")
+    @Feature("API tests")
+    @Owner("Baranov K.M.")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     void updateUserTest() {
         String personName = "Rogal Dorn";

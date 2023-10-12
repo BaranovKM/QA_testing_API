@@ -1,4 +1,6 @@
+import io.qameta.allure.*;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
@@ -9,13 +11,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DeleteUserTest extends BaseTest {
 
+    @DisplayName("DELETE for single user")
+    @Description("Make DELETE request for single user and check json in response is empty")
+    @Link("http://jira.com/test-12345")
+    @Feature("API tests")
+    @Owner("Baranov K.M.")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     void deleteUserTest() {
-        String personName = "Ferrus Manus";
-        String personJob = "Primarch";
         String deletedPersonId = "10";
-
-        Person person = new Person(personName, personJob);
 
         Response response =
                 given()

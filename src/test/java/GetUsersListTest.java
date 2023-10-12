@@ -1,3 +1,4 @@
+import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -14,9 +15,13 @@ public class GetUsersListTest extends BaseTest {
     String avatarUrlPattern = "https://reqres.in/img/faces/";
     String avatarFileType = "image.jpg";
 
-    //todo add test description and some tags like "positive/negative"
+    @DisplayName("GET for list of users")
+    @Description("Make GET request for list of users and validate json in response")
+    @Link("http://jira.com/test-12345")
+    @Feature("API tests")
+    @Owner("Baranov K.M.")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
-    @DisplayName("GET /users return list of users")
     void getUsersList() {
 
         UsersList users =
@@ -24,8 +29,6 @@ public class GetUsersListTest extends BaseTest {
                         .spec(getDefaultRequestSpecification())
                     .when()
                         .get(USERS_PATH)
-//                        .get(USERS_PATH+"?page=2")
-//                        .prettyPeek()
                     .then()
                         .contentType(ContentType.JSON)
                         .statusCode(HTTP_OK)
