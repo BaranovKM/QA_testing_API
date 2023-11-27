@@ -15,10 +15,10 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-            post {
-                always {
-                        allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-                }
+        }
+        stage('Allure Report') {
+            steps {
+                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
     }
