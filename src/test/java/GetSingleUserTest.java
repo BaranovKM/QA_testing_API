@@ -2,7 +2,7 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import static org.assertj.core.api.Assertions.*;
 
 import io.qameta.allure.*;
-import io.qameta.allure.restassured.AllureRestAssured;
+//import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +23,8 @@ public class GetSingleUserTest extends BaseTest {
         User user =
             given()
                 .spec(getDefaultRequestSpecification())
-                .filter(new AllureRestAssured())
+                    //commented until fix AllureRestAssured dependencies
+//                .filter(new AllureRestAssured())
             .when()
                 .get(USERS_PATH_WITH_PARAMS, UsersData.DEFAULT_USER_ID)
             .then()
