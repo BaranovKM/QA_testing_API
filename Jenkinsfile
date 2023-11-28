@@ -1,25 +1,22 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.5-eclipse-temurin-17-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent any
     stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
+        stage('Run tests'){
+            agent {
+                docker {
+                    image 'maven:3.9.5-eclipse-temurin-17-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
             }
-        }
-        stage('Tests') {
             steps {
-                sh 'mvn test'
+                //todo research test results dir(its updated?)
+                sh 'mvn verify'
             }
-        }
-        stage('Allure Report') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            }
+       }
+    }
+    post {
+        always {
+            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
         }
     }
 }
