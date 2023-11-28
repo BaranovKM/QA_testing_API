@@ -9,13 +9,16 @@ pipeline {
                 }
             }
             steps {
-                //todo research test results dir(its updated?)
                 sh 'mvn verify'
+                //save tests results for use outside container
+                stash name: 'allure-results', includes: 'allure-results/*'
             }
        }
     }
     post {
+        //generate allure report
         always {
+            unstash 'allure-results'
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
         }
     }
