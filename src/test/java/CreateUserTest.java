@@ -1,3 +1,4 @@
+import allure.AllureMarks;
 import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -11,6 +12,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
+import static allure.AllureMarks.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_CREATED;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,14 +22,13 @@ public class CreateUserTest extends BaseTest {
     @Test
     @DisplayName("POST for single user")
     @Description("Make POST request for single user and validate json in response")
-    @Severity(SeverityLevel.CRITICAL)
-    //todo move values to separeted class
-    @Owner("Baranov K.M.")
-    @Epic("Main system's api")
-    @Feature("User creation")
-    @Story("Endpoint for creating a single user")
-    @Link("http://jira.com/ticket-12345")
-    @TmsLink("http://testrail.com/test-12345")
+    @Severity(CRITICAL)
+    @Owner(BARANOV_KM)
+    @Epic(MAIN_SYSTEM_API)
+    @Feature(USER_CREATION)
+    @Story(ENDPOINT_FOR_CREATING_SINGLE_USER)
+    @Link(TICKET_123)
+    @TmsLink(TEST_123)
     void createUserTest() {
         String personName = "Horus Lupercal";
         String personJob = "Warmaster";
@@ -36,7 +38,6 @@ public class CreateUserTest extends BaseTest {
         Person person = new Person(personName, personJob);
 
         Allure.step("Make POST request");
-
         RequestSpecification request = given()
                 .spec(getDefaultRequestSpecification())
                 .body(person);
