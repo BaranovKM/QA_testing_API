@@ -9,18 +9,25 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
+import static allure.AllureMarks.*;
+import static allure.AllureMarks.TEST_123;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
+//todo move base test to src
 public class UpdateUserTest extends BaseTest {
+    @Test
     @DisplayName("PUT for single user")
     @Description("Make PUT request for single user and validate json in response")
-    @Link("http://jira.com/test-12345")
-    @Feature("API tests")
-    @Owner("Baranov K.M.")
-    @Severity(SeverityLevel.CRITICAL)
-    @Test
+    @Severity(CRITICAL)
+    @Owner(BARANOV_KM)
+    @Epic(MAIN_SYSTEM_API)
+    @Feature(USERS_ENDPOINT)
+    @Story(UPDATE_USER)
+    @Link(TICKET_123)
+    @TmsLink(TEST_123)
     void updateUserTest() {
         String personName = "Rogal Dorn";
         String personJob = "Praetorian of Terra";
@@ -30,6 +37,8 @@ public class UpdateUserTest extends BaseTest {
 
         Person person = new Person(personName, personJob);
 
+        //todo make refactoring and separate request and response for attachment to allure report
+        Allure.step("Make PUT request for user");
         Response response =
                 given()
                     .spec(getDefaultRequestSpecification())
@@ -43,6 +52,14 @@ public class UpdateUserTest extends BaseTest {
                     .extract()
                     .response();
 
+        //todo add request in allure report
+        Allure.addAttachment(
+                "response",
+                "application/json",
+                response.asPrettyString(),
+                ".json");
+
+        Allure.step("Check response contain only timestamp ");
         assertThat(response.as(Map.class).keySet())
                 .isNotNull()
                 .hasSize(1)
@@ -50,7 +67,13 @@ public class UpdateUserTest extends BaseTest {
 
         userUpdatedAt = LocalDateTime.parse(response.jsonPath().getString(updatedAt), DateTimeFormatter.ISO_ZONED_DATE_TIME);
 
+        Allure.step("Check timestamp");
         assertThat(userUpdatedAt).isAfter(LocalDateTime.now().minusHours(4));//server time has huge delay
+
+        /*
+            In real life I would add a step to check if the user's date is actually updated, but this is mock api
+            and user's data is hardcode and can't be updated
+         */
 
     }
 }
