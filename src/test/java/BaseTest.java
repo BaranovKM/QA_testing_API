@@ -12,7 +12,9 @@ public abstract class BaseTest {
     public static RequestSpecification getDefaultRequestSpecification(){
         return new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
-                .build();
+                .build()
+                .log()
+                .all();
     }
 
 }

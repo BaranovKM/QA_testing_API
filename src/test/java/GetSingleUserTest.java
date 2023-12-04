@@ -1,6 +1,7 @@
 import static allure.AllureMarks.*;
 import static allure.AllureMarks.TEST_123;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.util.ResultsUtils.PARENT_SUITE_LABEL_NAME;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,6 +12,8 @@ import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -26,20 +29,21 @@ public class GetSingleUserTest extends BaseTest {
     @Story(GET_SINGLE_USER)
     @Link(TICKET_123)
     @TmsLink(TEST_123)
+    @Tags({@Tag("api"), @Tag("smoke"), @Tag("regression")})
     void getSingleUser() {
 
-        //todo make refactoring and separate request and response for attachment to allure report
+        Allure.label(PARENT_SUITE_LABEL_NAME, GET_SINGLE_USER);
         Allure.step("Make GET request for single user");
-        ValidatableResponse response =                 given()
-                .spec(getDefaultRequestSpecification())
+        ValidatableResponse response =
+                given()
+                    .spec(getDefaultRequestSpecification())
                 .when()
-                .get(USERS_PATH_WITH_PARAMS, UsersData.DEFAULT_USER_ID)
+                    .get(USERS_PATH_WITH_PARAMS, UsersData.DEFAULT_USER_ID)
                 .then()
-                .contentType(ContentType.JSON)
-                .statusCode(HTTP_OK)
-                .time(Matchers.lessThan(5000L));
+                    .contentType(ContentType.JSON)
+                    .statusCode(HTTP_OK)
+                    .time(Matchers.lessThan(5000L));
 
-        //todo add request in allure report
         Allure.addAttachment(
                 "response",
                 "application/json",

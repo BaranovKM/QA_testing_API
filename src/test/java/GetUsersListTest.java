@@ -3,6 +3,8 @@ import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.net.HttpURLConnection;
@@ -10,6 +12,7 @@ import java.net.HttpURLConnection;
 import static allure.AllureMarks.*;
 import static allure.AllureMarks.TEST_123;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.util.ResultsUtils.PARENT_SUITE_LABEL_NAME;
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,22 +32,20 @@ public class GetUsersListTest extends BaseTest {
     @Story(GET_USERS_LIST)
     @Link(TICKET_123)
     @TmsLink(TEST_123)
+    @Tags({@Tag("api"), @Tag("smoke"), @Tag("regression")})
     void getUsersList() {
-
-        Allure.step("Make GET request for list of users");
-        //todo make refactoring and separate request and response for attachment to allure report
+        Allure.label(PARENT_SUITE_LABEL_NAME, GET_USERS_LIST);
         Allure.step("Make GET request for single user");
         ValidatableResponse response =
                 given()
                         .spec(getDefaultRequestSpecification())
-                        .when()
+                .when()
                         .get(USERS_PATH)
-                        .then()
+                .then()
                         .contentType(ContentType.JSON)
                         .statusCode(HTTP_OK)
                         .time(Matchers.lessThan(5000L));
 
-        //todo add request in allure report
         Allure.addAttachment(
                 "response",
                 "application/json",

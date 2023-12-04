@@ -5,6 +5,8 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.SpecificationQuerier;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -13,6 +15,7 @@ import java.util.Map;
 
 import static allure.AllureMarks.*;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.util.ResultsUtils.PARENT_SUITE_LABEL_NAME;
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_CREATED;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,6 +31,7 @@ public class CreateUserTest extends BaseTest {
     @Story(CREATE_SINGLE_USER)
     @Link(TICKET_123)
     @TmsLink(TEST_123)
+    @Tags({@Tag("api"), @Tag("smoke"), @Tag("regression")})
     void createUserTest() {
         String personName = "Horus Lupercal";
         String personJob = "Warmaster";
@@ -36,29 +40,30 @@ public class CreateUserTest extends BaseTest {
 
         Person person = new Person(personName, personJob);
 
+        Allure.label(PARENT_SUITE_LABEL_NAME, CREATE_SINGLE_USER);
         Allure.step("Make POST request");
-        RequestSpecification request = given()
-                .spec(getDefaultRequestSpecification())
-                .body(person);
+        RequestSpecification request =
+                given()
+                    .spec(getDefaultRequestSpecification())
+                    .body(person);
 
         Response response = request
                 .when()
-                .post(USERS_PATH)
+                    .post(USERS_PATH)
                 .then()
-                .statusCode(HTTP_CREATED)
-                .contentType(ContentType.JSON)
-                .time(Matchers.lessThan(5000L))
-                .extract()
-                .response();
+                    .statusCode(HTTP_CREATED)
+                    .contentType(ContentType.JSON)
+                    .time(Matchers.lessThan(5000L))
+                    .extract().response();
 
         Allure.addAttachment(
-                "request",
+                "request_body",
                 "application/json",
                 SpecificationQuerier.query(request).getBody().toString(),
                 ".json");
 
         Allure.addAttachment(
-                "response",
+                "response_body",
                 "application/json",
                 response.asPrettyString(),
                 ".json");
@@ -83,6 +88,5 @@ public class CreateUserTest extends BaseTest {
             Allure.step("Check timestamp");
             assertThat(userCreatedAt).isAfter(LocalDateTime.now().minusHours(4));//server time has huge delay
         });
-
     }
 }

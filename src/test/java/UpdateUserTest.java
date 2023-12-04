@@ -12,6 +12,7 @@ import java.util.Map;
 import static allure.AllureMarks.*;
 import static allure.AllureMarks.TEST_123;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
+import static io.qameta.allure.util.ResultsUtils.PARENT_SUITE_LABEL_NAME;
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,7 +38,7 @@ public class UpdateUserTest extends BaseTest {
 
         Person person = new Person(personName, personJob);
 
-        //todo make refactoring and separate request and response for attachment to allure report
+        Allure.label(PARENT_SUITE_LABEL_NAME, UPDATE_USER);
         Allure.step("Make PUT request for user");
         Response response =
                 given()
@@ -52,7 +53,6 @@ public class UpdateUserTest extends BaseTest {
                     .extract()
                     .response();
 
-        //todo add request in allure report
         Allure.addAttachment(
                 "response",
                 "application/json",
