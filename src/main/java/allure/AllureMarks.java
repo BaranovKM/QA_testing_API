@@ -13,6 +13,7 @@ public class AllureMarks {
     //Stories
     public static final String CREATE_SINGLE_USER = "Create a single user";
     public static final String GET_SINGLE_USER = "Get a single user";
+    public static final String GET_USERS_LIST = "Get list of users";
     public static final String GET_SINGLE_USER_ERRORS = "Errors when try get a single user";
     public static final String REMOVE_USER = "Remove user";
 
