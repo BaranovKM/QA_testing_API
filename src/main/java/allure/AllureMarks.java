@@ -8,11 +8,13 @@ public class AllureMarks {
     public static final String MAIN_SYSTEM_API = "Main system's api";
 
     //Features
-    public static final String USER_CREATION = "User creation";
+    public static final String USERS_ENDPOINT = "Users endpoint";
 
     //Stories
-    public static final String ENDPOINT_FOR_CREATING_SINGLE_USER = "Endpoint for creating a single user";
-    public static final String ENDPOINT_FOR_REMOVING_USER = "Endpoint for removing user";
+    public static final String CREATE_SINGLE_USER = "Create a single user";
+    public static final String GET_SINGLE_USER = "Get a single user";
+    public static final String GET_SINGLE_USER_ERRORS = "Errors when try get a single user";
+    public static final String REMOVE_USER = "Remove user";
 
     //Tasks links
     public static final String TICKET_123 = "http://jira.com/ticket-123";

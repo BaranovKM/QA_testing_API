@@ -1,11 +1,7 @@
 import io.qameta.allure.*;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.SpecificationQuerier;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.net.HttpURLConnection;
 
 import static allure.AllureMarks.*;
 import static allure.AllureMarks.TEST_123;
@@ -22,17 +18,16 @@ public class DeleteUserTest extends BaseTest {
     @Severity(CRITICAL)
     @Owner(BARANOV_KM)
     @Epic(MAIN_SYSTEM_API)
-    @Feature(USER_CREATION)
-    @Story(ENDPOINT_FOR_REMOVING_USER)
+    @Feature(USERS_ENDPOINT)
+    @Story(REMOVE_USER)
     @Link(TICKET_123)
     @TmsLink(TEST_123)
     void deleteUserTest() {
         String deletedPersonId = "10";
 
         Allure.step("Make DELETE request");
-        RequestSpecification request = given().spec(getDefaultRequestSpecification());
-
-        Response response = request
+        Response response = given()
+                .spec(getDefaultRequestSpecification())
                 .when()
                 .delete(USERS_PATH_WITH_PARAMS, deletedPersonId)
                 .then()
@@ -40,7 +35,7 @@ public class DeleteUserTest extends BaseTest {
                 .extract()
                 .response();
 
-        Allure.step("Validate response");
+        Allure.step("Check response body is empty");
         assertThat(response.asString()).isEmpty();
 
     }

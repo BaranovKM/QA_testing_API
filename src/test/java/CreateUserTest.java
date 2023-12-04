@@ -1,4 +1,3 @@
-import allure.AllureMarks;
 import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -25,8 +24,8 @@ public class CreateUserTest extends BaseTest {
     @Severity(CRITICAL)
     @Owner(BARANOV_KM)
     @Epic(MAIN_SYSTEM_API)
-    @Feature(USER_CREATION)
-    @Story(ENDPOINT_FOR_CREATING_SINGLE_USER)
+    @Feature(USERS_ENDPOINT)
+    @Story(CREATE_SINGLE_USER)
     @Link(TICKET_123)
     @TmsLink(TEST_123)
     void createUserTest() {
