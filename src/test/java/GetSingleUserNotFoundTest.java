@@ -23,14 +23,14 @@ public class GetSingleUserNotFoundTest extends BaseTest {
     @Owner(BARANOV_KM)
     @Epic(MAIN_SYSTEM_API)
     @Feature(USERS_ENDPOINT)
-    @Story(GET_SINGLE_USER_ERRORS)
+    @Story(USER_NOT_FOUND)
     @Link(TICKET_123)
     @TmsLink(TEST_123)
     @Tags({@Tag("api"), @Tag("smoke"), @Tag("regression")})
     void singleUserNotFound() {
         int wrongUserId = 50;
 
-        Allure.label(PARENT_SUITE_LABEL_NAME, GET_SINGLE_USER_ERRORS);
+        Allure.label(PARENT_SUITE_LABEL_NAME, USER_NOT_FOUND);
         Allure.step("Make GET request with wrong id");
         Response response = given()
             .spec(getDefaultRequestSpecification())

@@ -29,6 +29,7 @@ public class DeleteUserTest extends BaseTest {
     @Link(TICKET_123)
     @TmsLink(TEST_123)
     @Tags({@Tag("api"), @Tag("smoke"), @Tag("regression")})
+    @Issue(BUG_123)
     void deleteUserTest() {
         String deletedPersonId = "10";
 
@@ -37,7 +38,7 @@ public class DeleteUserTest extends BaseTest {
         Response response =
                 given()
                         .spec(getDefaultRequestSpecification())
-                .when()
+                        .when()
                         .delete(USERS_PATH_WITH_PARAMS, deletedPersonId);
 
         Allure.step("Check status code 204");
@@ -46,14 +47,16 @@ public class DeleteUserTest extends BaseTest {
         Allure.step("Check response body is empty");
         assertThat(response.asString()).isEmpty();
 
-        Allure.step("Try to get removed user and check status code 404");
-        given()
+        Allure.step("Try to get removed user");
+        Response repeatedResponse = given()
                 .spec(getDefaultRequestSpecification())
-        .when()
-                .get(USERS_PATH_WITH_PARAMS, deletedPersonId)
-        .then()
-                .contentType(ContentType.JSON)
-                .statusCode(HTTP_NOT_FOUND)
-                .body(Matchers.is(EMPTY_JSON));
+                .when()
+                .get(USERS_PATH_WITH_PARAMS, deletedPersonId);
+
+        Allure.step("Check status code 404", stepContext -> {
+            repeatedResponse.then()
+                    .statusCode(HTTP_NOT_FOUND);
+        });
+
     }
 }

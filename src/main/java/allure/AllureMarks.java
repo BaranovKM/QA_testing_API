@@ -14,7 +14,7 @@ public class AllureMarks {
     public static final String CREATE_SINGLE_USER = "Create a single user";
     public static final String GET_SINGLE_USER = "Get a single user";
     public static final String GET_USERS_LIST = "Get list of users";
-    public static final String GET_SINGLE_USER_ERRORS = "Errors when try get a single user";
+    public static final String USER_NOT_FOUND = "When user not found return 404";
     public static final String REMOVE_USER = "Remove user";
     public static final String UPDATE_USER = "Update user";
 
@@ -23,6 +23,9 @@ public class AllureMarks {
 
     //Testcases links
     public static final String TEST_123 = "http://testrail.com/test-123";
+
+    //bugs
+    public static final String BUG_123 = "http://bugtracker.com/bug-123";
 
 
 }
