@@ -16,10 +16,11 @@ pipeline {
             }
             post {
                 unstable {
-                    echo "Run after unstable stage"
-                    script {
-                        currentBuild.result = 'SUCCESS'
-                    }
+                    echo "unstable stage"
+                    echo currentBuild.result
+//                     script {
+//                         currentBuild.result = 'SUCCESS'
+//                     }
                 }
             }
        }
@@ -29,7 +30,14 @@ pipeline {
         always {
             unstash 'allure-results'
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            echo currentBuild.currentResult
         }
+         unstable {
+                            echo "unstable build"
+                            echo currentBuild.result
+                            echo currentBuild.currentResult
+        //                     script {
+        //                         currentBuild.result = 'SUCCESS'
+        //                     }
+                        }
     }
 }
