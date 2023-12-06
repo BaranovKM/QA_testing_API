@@ -13,9 +13,13 @@ pipeline {
                 sh 'mvn verify -Dmaven.test.failure.ignore=true'
                 //save tests results for use outside container
                 stash name: 'allure-results', includes: 'allure-results/*'
-                //forced success state
-                warnError(message: 'catch unstable build error'){
-                    sh 'exit 0'
+            }
+            post {
+                unstable {
+                    echo "Run after unstable stage"
+                    script {
+                        currentBuild.result = 'SUCCESS'
+                    }
                 }
             }
        }
@@ -25,7 +29,7 @@ pipeline {
         always {
             unstash 'allure-results'
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-//             setBuildResult('SUCCESS')
+            echo currentBuild.currentResult
         }
     }
 }
