@@ -10,18 +10,11 @@ pipeline {
             }
             steps {
             //todo fix "unstable" label on jenkins pipeline
+//                 sh 'junit skipMarkingBuildUnstable: true'
+//                 junit skipMarkingBuildUnstable: true, testResults: 'test-results.xml'
                 sh 'mvn verify -Dmaven.test.failure.ignore=true'
                 //save tests results for use outside container
                 stash name: 'allure-results', includes: 'allure-results/*'
-            }
-            post {
-                unstable {
-                    echo "unstable stage"
-                    echo currentBuild.result
-//                     script {
-//                         currentBuild.result = 'SUCCESS'
-//                     }
-                }
             }
        }
     }
@@ -31,13 +24,5 @@ pipeline {
             unstash 'allure-results'
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
         }
-         unstable {
-                            echo "unstable build"
-                            echo currentBuild.result
-                            echo currentBuild.currentResult
-        //                     script {
-        //                         currentBuild.result = 'SUCCESS'
-        //                     }
-                        }
     }
 }
