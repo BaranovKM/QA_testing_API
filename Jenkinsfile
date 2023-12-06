@@ -21,6 +21,7 @@ pipeline {
         always {
             unstash 'allure-results'
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            setBuildResult('SUCCESS')
         }
     }
 }
