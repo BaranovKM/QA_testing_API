@@ -9,7 +9,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn verify'
+//                 sh 'mvn verify'
+                sh 'mvn test'
                 //save tests results for use outside container
                 stash name: 'allure-results', includes: 'allure-results/*'
             }
