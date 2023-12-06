@@ -53,10 +53,10 @@ public class DeleteUserTest extends BaseTest {
                 .when()
                 .get(USERS_PATH_WITH_PARAMS, deletedPersonId);
 
-//        Allure.step("Check status code 404", stepContext -> {
-//            repeatedResponse.then()
-//                    .statusCode(HTTP_NOT_FOUND);
-//        });
+        Allure.step("Check status code 404", stepContext -> {
+            repeatedResponse.then()
+                    .statusCode(HTTP_NOT_FOUND);
+        });
 
     }
 }

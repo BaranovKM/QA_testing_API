@@ -9,8 +9,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn verify'
-//                 sh 'mvn verify -Dmaven.test.failure.ignore=true'
+            //todo fix "unstable" label on jenkins pipeline
+                sh 'mvn verify -Dmaven.test.failure.ignore=true'
                 //save tests results for use outside container
                 stash name: 'allure-results', includes: 'allure-results/*'
             }
