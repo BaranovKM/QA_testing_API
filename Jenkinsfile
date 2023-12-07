@@ -9,10 +9,7 @@ pipeline {
                 }
             }
             steps {
-            //todo fix "unstable" label on jenkins pipeline
-//                 sh 'junit skipMarkingBuildUnstable: true'
-//                 junit skipMarkingBuildUnstable: true, testResults: 'test-results.xml'
-                sh 'mvn verify -Dmaven.test.failure.ignore=true'
+                sh 'mvn verify -Dmaven.test.failure.ignore=true'//ignore tests fails so maven can make build
                 //save tests results for use outside container
                 stash name: 'allure-results', includes: 'allure-results/*'
             }
@@ -23,6 +20,13 @@ pipeline {
         always {
             unstash 'allure-results'
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            junit allowEmptyResults: true, skipMarkingBuildUnstable: true, testResults: '**/target/surefire-reports/*.xml'
         }
+            //todo fix "unstable" label on jenkins pipeline
+//         unstable {
+//             script {
+//                 currentBuild.result = 'SUCCESS'
+//             }
+//         }
     }
 }
