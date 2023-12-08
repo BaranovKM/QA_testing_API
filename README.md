@@ -10,22 +10,27 @@ These tests can be run in Jenkins pipeline. At the end of pipeline, a test repor
 ## Project's structure
 The project has a simple structure : model classes and several basic tests
 
-  insert screenshot of packages structure(make refactoring)
+  //TODO insert screenshot of packages structure(make refactoring)
 
 The test code is written in Java using REST Assured, AssertJ, Junit 5 and Allure Report libraries
 
-  insert screenshot of code
+//todo find how setup image size
   ![Screenshot of a test code](/assets/images/codeScreenshot.png)
 
-## Tests runs 
-Tests runs on jenkins node. Jenkinsfile with pipeline settings is contains in repository
+## Running tests 
+Tests can be run both localy also in Jenkins. Jenkinsfile with pipeline settings is contained in repository
 
 insert screenshot of jenkinsfile
+![Screenshot of a jenkinsfile](/assets/images/jenkinsfileScreenshot.png)
 
-insert screenshot of pipeline
+//TODO insert screenshot of pipeline
 
-## Tests report
-For report generation used Allure Report
+## Test report
+Allure Report is used to generate reports.
 
-insert screenshots of report
+![Screenshot of a Allure Report Overview ](/assets/images/allureOverviewScreenshot.png)
+
+![Screenshot of a Allure Report Overview ](/assets/images/allureBehaviorsScreenshot.png)
+
+![Screenshot of a Allure Report Overview ](/assets/images/allureCategoriesScreenshot.png)
 
