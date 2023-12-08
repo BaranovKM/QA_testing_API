@@ -26,6 +26,7 @@ pipeline {
 //         unstable {
 //             script {
 //                 currentBuild.result = 'SUCCESS'
+//                 currentBuild.rawBuild.@result = hudson.model.Result.SUCCESS
 //             }
 //         }
     }
