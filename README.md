@@ -1,9 +1,15 @@
 # API tests
 
-Java, Maven, rest assured, AssertJ, Junit 5, Docker, Jenkins, Allure Report. add beutiful icons for used technologies 
+Java, Maven, rest assured, AssertJ, Junit 5, Docker, Jenkins, Allure Report.
 ![Static Badge](https://img.shields.io/badge/Java-17-red?style=plastic)
 ![Static Badge](https://img.shields.io/badge/Maven-3.9.1-blue?style=plastic)
 ![Static Badge](https://img.shields.io/badge/REST_Assured-5.3.1-green?style=plastic)
+![Static Badge](https://img.shields.io/badge/Junit-5.9.2-orange?style=plastic)
+![Static Badge](https://img.shields.io/badge/Lombok-1.18.28-brown?style=plastic)
+![Static Badge](https://img.shields.io/badge/Jackson-2.9.5-violet?style=plastic)
+![Static Badge](https://img.shields.io/badge/AssertJ-3.24.2-gold?style=plastic)
+![Static Badge](https://img.shields.io/badge/Allure_Report-2.24-yellow?style=plastic)
+![Static Badge](https://img.shields.io/badge/Jenkins-2.414-purple?style=plastic)
 
 
 ## Description
